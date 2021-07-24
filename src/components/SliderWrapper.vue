@@ -6,7 +6,7 @@
     </div>
     <Slider @emitValue="sliderValueCallback" :minValue="minValue" :maxValue="maxValue"/>
     <div class="slider-title slider-bottom-title">
-      <div>{{minValue}}{{ symbol }}</div>
+      <div>{{minValue}}<span>{{ symbol }}</span></div>
       <div>{{this.formattedValue(maxValue)}}<span>{{ symbol }}</span></div>
     </div>
   </div>
@@ -26,6 +26,7 @@ export default {
     symbol: String,
     minValue: Number,
     maxValue: Number,
+    name: String,
   },
       data() {
         return {
@@ -38,6 +39,7 @@ export default {
         },
         sliderValueCallback(value) {
             this.mutableSliderRightTopTitle = this.formattedValue(value);
+            this.$emit('updateSlider', {sliderName: this.name, value})
         },
     },
 }

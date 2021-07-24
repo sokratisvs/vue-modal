@@ -5,14 +5,17 @@
       <div v-for="item in modalSliderItems" :key="item.symbol">
         <template>
           <SliderWrapper 
+            :name="item.name"
             :symbol="item.symbol" 
             :sliderLeftTopTitle="item.sliderLeftTopTitle"
             :sliderRightTopTitle="item.sliderRightTopTitle"
             :minValue="item.minValue" 
-            :maxValue="item.maxValue" 
+            :maxValue="item.maxValue"
+            @updateSlider="updateSliderCallback"
           />
         </template>
       </div>
+      <p class="result-title">Μηνιαία Δόση: <span class="result-value">{{ calculateMonthlyValue }}</span><span class="result-symbol">€</span></p>
     </Modal>
   </div>
   <button @click="toggleModal">Show Modal</button>
@@ -40,7 +43,8 @@ export default {
                 sliderRightTopTitle: 0,
                 minValue: 0,
                 maxValue: 10700,
-                symbol: '€', 
+                symbol: '€',
+                name: 'downPayment',
               },
               { 
                 sliderLeftTopTitle: 'Διάρκεια',
@@ -48,32 +52,55 @@ export default {
                 minValue: 3,
                 maxValue: 72,
                 symbol: 'μήνες', 
+                name: 'duration',
               }
             ],
-            sliderLeftTopTitle: 'Προκαταβολή',
-            sliderRightTopTitle: 0,
-            minValue: 0,
-            maxValue: 10700,
-            symbol: '€',
+            sliderData: {
+              downPayment: 0,
+              duration: 3,
+            }
         };
     },
     methods: {
         toggleModal() {
             this.showModal = !this.showModal;
         },
-        formattedValue(value) {
-          return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+        updateSliderCallback(data) {
+          this.$set(this.sliderData, `${[data.sliderName]}`, data.value)
+          return this.sliderData;
         },
-        sliderValueCallback(value) {
-            this.sliderRightTopTitle = this.formattedValue(value);
+        formattedValue(value) {
+          const formattedThousands = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+          return formattedThousands.replace(/.([^.]*)$/, ",$1");
         },
     },
+    computed: {
+      calculateMonthlyValue: function () {
+          const finalPrice = 20000;
+          const subtraction = parseInt(finalPrice, 10) - parseInt(this.sliderData.downPayment, 10);
+          const result = subtraction / parseInt(this.sliderData.duration, 10);
+          return this.formattedValue(result.toFixed(2));
+        }
+    }
 };
 </script>
 
 <style>
-h1 {
-  display: 'inline-block';
-  border-bottom: 1px solid #2c3e50;
+.result-title {
+  font-size: 15px;
+  line-height: 20px;
+  font-weight: bold;
+  line-height: 20px;
+  margin-bottom: 29px;
+}
+
+.result-value {
+  font-size: 24px;
+  line-height: 13px;
+}
+
+.result-symbol {
+  font-size: 20px;
+  line-height: 16px;
 }
 </style>
