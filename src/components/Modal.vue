@@ -1,10 +1,13 @@
 <template>
   <div class="backdrop">
       <div class="modal">
-        <div class="title">{{ title }}</div>
-        <div class="subtitle">{{ subtitle }}</div>
-        <slot></slot>
-        <button @click="handleClick">Close</button>
+        <div class="padded-content">
+            <div @click="handleClick" class="close"/>
+            <div class="title">{{ title }}</div>
+            <div class="subtitle">{{ subtitle }}</div>
+            <slot></slot>
+          </div>
+        <slot name="footer"></slot>
     </div>
   </div>
 </template>
@@ -33,9 +36,9 @@ export default {
   }
 
   .modal {
+    position: relative;
     width: 100%;
     max-width: 655px;
-    padding: 30px 112px 30px 112px;
     margin: 100px auto;
     background: #FFFFFF 0% 0% no-repeat padding-box;
     box-shadow: 0px 0px 40px #00000080;
@@ -48,7 +51,7 @@ export default {
     line-height: 13px;
     letter-spacing: 0px;
     color: #323232;
-    margin: 22px 0px 8px 0px;
+    margin: 12px 0px 8px 0px;
   }
 
   .modal .subtitle {
@@ -57,8 +60,39 @@ export default {
     margin-bottom: 31px;
   }
 
+  .padded-content {
+      padding: 52px 112px 0px 112px;
+  }
+
   .inactive {
     display: none;
   }
+
+  .close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    width: 32px;
+    height: 32px;
+    opacity: 0.3;
+    cursor: pointer;
+}
+.close:hover {
+  opacity: 1;
+}
+.close:before, .close:after {
+  position: absolute;
+  left: 15px;
+  content: ' ';
+  height: 15px;
+  width: 2px;
+  background-color: #333;
+}
+.close:before {
+  transform: rotate(45deg);
+}
+.close:after {
+  transform: rotate(-45deg);
+}
 
 </style>

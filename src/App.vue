@@ -16,6 +16,17 @@
         </template>
       </div>
       <p class="result-title">Μηνιαία Δόση: <span class="result-value">{{ calculateMonthlyValue }}</span><span class="result-symbol">€</span></p>
+      <template v-slot:footer>
+        <div>
+      <FormInput 
+        :description="formInputDescription" 
+        :inputName="formInputName" 
+        :placeholder="formInputPlaceholder" 
+        :cta="formInputCTA"
+        :type="formInputType"
+      />
+      </div>
+      </template>
     </Modal>
   </div>
   <button @click="toggleModal">Show Modal</button>
@@ -25,12 +36,14 @@
 <script>
 import Modal from './components/Modal.vue';
 import SliderWrapper from './components/SliderWrapper.vue';
+import FormInput from './components/FormInput.vue';
 
 export default {
     name: 'App',
     components: {
         Modal,
         SliderWrapper,
+        FormInput,
     },
     data() {
         return {
@@ -58,7 +71,12 @@ export default {
             sliderData: {
               downPayment: 0,
               duration: 3,
-            }
+            },
+            formInputDescription: 'Συμπλήρωσε εδώ το τηλέφωνό σου. Θα σε καλέσουμε άμεσα.',
+            formInputName: 'telephone',
+            formInputPlaceholder: 'Αριθμός τηλεφώνου…',
+            formInputCTA: 'Καλεστε',
+            formInputType: 'tel',
         };
     },
     methods: {
@@ -73,6 +91,9 @@ export default {
           const formattedThousands = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
           return formattedThousands.replace(/.([^.]*)$/, ",$1");
         },
+        updateInputValue(value) {
+          this.formInputValue = value;
+        }
     },
     computed: {
       calculateMonthlyValue: function () {

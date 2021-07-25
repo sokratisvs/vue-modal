@@ -2,12 +2,12 @@
   <div>
     <div class="slider-title slider-top-title">
       <div class="slider-top-left-title">{{sliderLeftTopTitle}}</div>
-      <div class="slider-top-right-title">{{this.mutableSliderRightTopTitle}}<span class="symbol">{{ symbol }}</span></div>
+      <div class="slider-top-right-title">{{this.mutableSliderRightTopTitle}}<span class="symbol" v-bind:class="renderSymbolFontSize">{{ renderWhitespace }}{{ symbol }}</span></div>
     </div>
     <Slider @emitValue="sliderValueCallback" :minValue="minValue" :maxValue="maxValue"/>
     <div class="slider-title slider-bottom-title">
-      <div>{{minValue}}<span>{{ symbol }}</span></div>
-      <div>{{this.formattedValue(maxValue)}}<span>{{ symbol }}</span></div>
+      <div>{{minValue}}<span>{{ renderWhitespace }}{{ symbol }}</span></div>
+      <div>{{renderFormattedValue}}<span>{{ renderWhitespace }}{{ symbol }}</span></div>
     </div>
   </div>
 </template>
@@ -42,6 +42,17 @@ export default {
             this.$emit('updateSlider', {sliderName: this.name, value})
         },
     },
+    computed: {
+      renderFormattedValue() {
+         return this.formattedValue(this.maxValue);
+      },
+      renderWhitespace() {
+        return this.name === 'duration' ? ' ' : null;
+      },
+      renderSymbolFontSize() {
+        return this.name === 'duration' ? 'symbol-small' : 'symbol-big';
+      }
+    }
 }
 </script>
 
@@ -54,7 +65,7 @@ export default {
 
 .slider-top-title {
   font-weight: bold;
-  margin-bottom: 29px;
+  margin-bottom: 16px;
 }
 
 .slider-bottom-title {
@@ -76,7 +87,11 @@ export default {
   line-height: 16px;
 }
 
-.symbol {
+.symbol-big {
   font-size: 20px;
+}
+
+.symbol-small {
+ font-size: 15px;
 }
 </style>

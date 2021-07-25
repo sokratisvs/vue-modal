@@ -9,7 +9,6 @@
         @slide-end="emitValue" 
         :dot-size="dotSize"
     >
-<!-- :slider-style="sliderStyle" -->
       <template slot="knob">
         <div class="knobby">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" width="26" height="26">
@@ -40,7 +39,6 @@ export default {
       sliderValue: this.minValue,
       step: 1,
       dotSize: 26,
-    //   sliderStyle: 'slider-style'
     };
   },
   components: {
@@ -57,17 +55,11 @@ export default {
 <style>
 .slider {
   width: 100%;
-  margin-bottom: 13px;
 }
-
-/* .slider-style {
-    padding-left: 0;
-    padding-right: 0;
-} */
 
 .slider .range-slider-rail {
   height: 11px;
-  background-color: #c4e4eb;
+  background-color: #D8D8D8;
   border-radius: 5px;
 }
 
@@ -105,5 +97,13 @@ export default {
 
 .vue-range-slider.slider-component .slider-tooltip-wrap .slider-tooltip {
     display: none;
+}
+
+.vue-range-slider.slider-component .slider .slider-dot {
+      box-shadow: 0px 0px 10px #00000033;
+}
+
+.vue-range-slider.slider-component {
+  padding: 13px 0px 13px 0px !important;
 }
 </style> 
