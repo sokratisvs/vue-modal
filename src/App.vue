@@ -24,6 +24,7 @@
         :placeholder="formInputPlaceholder" 
         :cta="formInputCTA"
         :type="formInputType"
+        @inputValue="updateInputValue"
       />
       </div>
       </template>

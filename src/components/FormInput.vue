@@ -4,11 +4,10 @@
     <div class="row-cell description">
         {{ description }}
     </div>
-    <div class="row-cell input-block">
+    <form class="row-cell input-block">
     <input
       :name="inputName"
       v-model="fieldValue"
-      v-on:input="onValueChange($event.target.value)"
       :type="type"
       :placeholder="placeholderText"
     />
@@ -18,12 +17,13 @@
     >
     {{ cta }}
     </button>
-</div>
+      <p v-if="result" class="result">
+        {{ result }}
+      </p>
+  </form>
 
   </div>
-  <p v-if="result" class="result">
-{{ result }}
-  </p>
+
   </div>
 </template>
 
@@ -36,7 +36,6 @@ export default {
     placeholder: String,
     cta: String,
     type: String,
-    valueProp: String
   },
     data() {
       return {
@@ -61,13 +60,14 @@ export default {
             }
             return true;
         },
-        onValueChange(targetValue) {
-          this.$emit('inputValue', targetValue);
-          if(this.result.length > 0) {
-              this.result = '';
+    },
+        watch:{
+        fieldValue: function (newtargetValue, oldTargetValue){
+          if(newtargetValue !== oldTargetValue) {
+            this.result = '';
           }
         },
-    },
+    }
 }
 </script>
 
@@ -141,8 +141,7 @@ input::placeholder {
 
 .result {
   position: absolute;
-  bottom: 5px;
-  right: 50px;
+  bottom: -35px;
   font-size: 14px;
   color: white;
 }
