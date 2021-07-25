@@ -5,12 +5,17 @@
         {{ description }}
     </div>
       <form class="row-cell input-block">
-      <input
-        :name="inputName"
-        v-model="fieldValue"
-        :type="type"
-        :placeholder="placeholderText"
-      />
+      <div class="input-container">
+        <span v-if="!hasFocus" class="icon" v-html="bgImage"/>
+        <input
+          :name="inputName"
+          v-model="fieldValue"
+          :type="type"
+          :placeholder="placeholderText"
+          @focus="hasFocus = true"
+          @blur="setFocusAttribute"
+        />
+      </div>
       <button
         @click="checkForm"
         class="button"
@@ -41,10 +46,15 @@ export default {
             result: '',
             fieldValue: '',
             placeholderText: this.placeholder,
-            inputIcon: this.icon,
+            hasFocus: false,
       };
   },
    methods: {
+      setFocusAttribute() {
+            if(this.fieldValue.length === 0) {
+               this.hasFocus = false;
+          }
+      },
         checkForm(e) {
           e.preventDefault();
           const regex = new RegExp(/^\+?[0-9]{10}$/);
@@ -68,6 +78,12 @@ export default {
           }
         },
     },
+    computed: {
+      bgImage () {
+        const x = require( `!!raw-loader!@/assets/images//${ this.icon }.svg` ).default;
+        return x;
+      },
+    }
 }
 </script>
 
@@ -107,6 +123,11 @@ export default {
    justify-content: flex-end;
 }
 
+
+.input-container {
+  position: relative;
+}
+
 input {
   width: 216px;
   height: 100%;
@@ -122,6 +143,15 @@ input::placeholder {
   letter-spacing: 0px;
   color: #9E9E9E;
   opacity: 1;
+}
+
+.icon {
+  content: "";
+  position: absolute;
+  left: 20px;
+  top: 12px;
+  bottom: 0;
+  width: 20px;
 }
 
 .button {
