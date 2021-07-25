@@ -2,12 +2,24 @@
   <div>
     <div class="slider-title slider-top-title">
       <div class="slider-top-left-title">{{sliderLeftTopTitle}}</div>
-      <div class="slider-top-right-title">{{this.mutableSliderRightTopTitle}}<span class="symbol" v-bind:class="renderSymbolFontSize">{{ renderWhitespace }}{{ symbol }}</span></div>
+      <div class="slider-top-right-title">
+        {{this.mutableSliderRightTopTitle}}
+        <span class="symbol" v-bind:class="renderSymbolFontSize">
+          {{ renderWhitespace }}{{ symbol }}
+        </span>
+      </div>
     </div>
-    <Slider @emitValue="sliderValueCallback" :minValue="minValue" :maxValue="maxValue"/>
+    <Slider 
+      @emitValue="sliderValueCallback" 
+      :minValue="minValue" 
+      :maxValue="maxValue"
+    />
     <div class="slider-title slider-bottom-title">
       <div>{{minValue}}<span>{{ renderWhitespace }}{{ symbol }}</span></div>
-      <div>{{renderFormattedValue}}<span>{{ renderWhitespace }}{{ symbol }}</span></div>
+      <div>
+        {{renderFormattedValue}}
+        <span>{{ renderWhitespace }}{{ symbol }}</span>
+      </div>
     </div>
   </div>
 </template>
@@ -16,26 +28,26 @@
 import Slider from './Slider.vue';
 
 export default {
-  name: 'SliderWrapper',
-  components: {
-      Slider,
-  },
-  props: {
-    sliderLeftTopTitle: String,
-    sliderRightTopTitle: Number,
-    symbol: String,
-    minValue: Number,
-    maxValue: Number,
-    name: String,
-  },
-      data() {
+    name: 'SliderWrapper',
+    components: {
+        Slider,
+    },
+    props: {
+        sliderLeftTopTitle: String,
+        sliderRightTopTitle: Number,
+        symbol: String,
+        minValue: Number,
+        maxValue: Number,
+        name: String,
+    },
+    data() {
         return {
-             mutableSliderRightTopTitle: this.sliderRightTopTitle
+            mutableSliderRightTopTitle: this.sliderRightTopTitle
         };
     },
-   methods: {
+    methods: {
         formattedValue(value) {
-          return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
+            return value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.')
         },
         sliderValueCallback(value) {
             this.mutableSliderRightTopTitle = this.formattedValue(value);
@@ -43,15 +55,15 @@ export default {
         },
     },
     computed: {
-      renderFormattedValue() {
-         return this.formattedValue(this.maxValue);
-      },
-      renderWhitespace() {
-        return this.name === 'duration' ? ' ' : null;
-      },
-      renderSymbolFontSize() {
-        return this.name === 'duration' ? 'symbol-small' : 'symbol-big';
-      }
+        renderFormattedValue() {
+            return this.formattedValue(this.maxValue);
+        },
+        renderWhitespace() {
+            return this.name === 'duration' ? ' ' : null;
+        },
+        renderSymbolFontSize() {
+            return this.name === 'duration' ? 'symbol-small' : 'symbol-big';
+        }
     }
 }
 </script>

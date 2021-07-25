@@ -32,57 +32,56 @@
 
 <script>
 export default {
-  name: 'FormInput',
-  props: {
-    description: String,
-    inputName: String,
-    placeholder: String,
-    cta: String,
-    type: String,
-    icon: String
-  },
+    name: 'FormInput',
+    props: {
+        description: String,
+        inputName: String,
+        placeholder: String,
+        cta: String,
+        type: String,
+        icon: String
+    },
     data() {
-      return {
+        return {
             result: '',
             fieldValue: '',
             placeholderText: this.placeholder,
             hasFocus: false,
-      };
-  },
-   methods: {
-      setFocusAttribute() {
+        };
+    },
+    methods: {
+        setFocusAttribute() {
             if(this.fieldValue.length === 0) {
-               this.hasFocus = false;
-          }
-      },
+                this.hasFocus = false;
+            }
+        },
         checkForm(e) {
-          e.preventDefault();
-          const regex = new RegExp(/^\+?[0-9]{10}$/);
-          const isValueValid = regex.test(this.fieldValue);
+            e.preventDefault();
+            const regex = new RegExp(/^\+?[0-9]{10}$/);
+            const isValueValid = regex.test(this.fieldValue);
             if (isValueValid) {
-              // eslint-disable-next-line no-return-assign
+                // eslint-disable-next-line no-return-assign
                 return this.result = 'Επιτυχής καταχώριση!';
             }
 
             if (!isValueValid) {
-              // eslint-disable-next-line no-return-assign
+                // eslint-disable-next-line no-return-assign
                 return this.result = 'Tο στοιχείο που καταχωρήσατε ειναι λάθος';
             }
             return true;
         },
     },
-        watch:{
+    watch:{
         fieldValue: function (newtargetValue, oldTargetValue){
-          if(newtargetValue !== oldTargetValue) {
-            this.result = '';
-          }
+            if(newtargetValue !== oldTargetValue) {
+                this.result = '';
+            }
         },
     },
     computed: {
-      bgImage () {
-        const x = require( `!!raw-loader!@/assets/images//${ this.icon }.svg` ).default;
-        return x;
-      },
+        bgImage () {
+            return require(`!!raw-loader!@/assets/images//${this.icon}.svg`).default;
+        },
     }
 }
 </script>

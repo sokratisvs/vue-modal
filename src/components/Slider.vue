@@ -22,37 +22,37 @@ import VueSlider from 'vue-slider-component'
 import 'vue-slider-component/theme/default.css'
 
 export default {
-  name: "Slider",
-  props: {
-    minValue: Number,
-    maxValue: Number,
-  },
-  data() {
-    return {
-      sliderValue: this.minValue,
-      step: 1,
-      dotSize: 26,
-      toolTipStyle: {
-        'background-color': '#01AED8',
-        'border-color': '#01AED8',
-      },
-      railStyle: {
-        height: '8px',
-        'background-color': '#D8D8D8',
-        'border-radius': '9px'
-      },
-      processStyle: {
-        'background-color': '#01AED8',
-      },
-      dotStyle: {
-        'box-shadow': '0px 0px 10px #00000033',
-      }
-    };
-  },
-  components: {
-    VueSlider
-  },
-   methods: {
+    name: 'Slider',
+    props: {
+        minValue: Number,
+        maxValue: Number,
+    },
+    data() {
+        return {
+            sliderValue: this.minValue,
+            step: 1,
+            dotSize: 26,
+            toolTipStyle: {
+                'background-color': '#01AED8',
+                'border-color': '#01AED8',
+            },
+            railStyle: {
+                height: '8px',
+                'background-color': '#D8D8D8',
+                'border-radius': '9px'
+            },
+            processStyle: {
+                'background-color': '#01AED8',
+            },
+            dotStyle: {
+                'box-shadow': '0px 0px 10px #00000033',
+            }
+        };
+    },
+    components: {
+        VueSlider
+    },
+    methods: {
         emitValue() {
             this.$emit('emitValue', parseInt(this.sliderValue));
         },
