@@ -6,7 +6,7 @@
         :max="maxValue" 
         :interval="step" 
         v-model="sliderValue" 
-        @drag-end="emitValue" 
+        @change="emitValue" 
         :dotSize="dotSize"
         :railStyle="railStyle"
         :tooltipStyle="toolTipStyle"
