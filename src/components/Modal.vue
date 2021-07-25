@@ -95,4 +95,22 @@ export default {
   transform: rotate(-45deg);
 }
 
+@media (max-width: 700px) {
+  .modal {
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+  }
+}
+
+@media (min-width: 375px) and (max-width: 700px) {
+  .padded-content {
+        padding: 30px 62px 0px 62px;
+    }
+}
+
+@media (max-width: 375px) {
+  .padded-content {
+        padding: 30px 42px 0px 42px;
+    }
+}
 </style>

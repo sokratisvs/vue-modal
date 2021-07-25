@@ -1,29 +1,27 @@
 <template>
 <div class="container">
-<div class="form-row">
+  <div class="form-row">
     <div class="row-cell description">
         {{ description }}
     </div>
-    <form class="row-cell input-block">
-    <input
-      :name="inputName"
-      v-model="fieldValue"
-      :type="type"
-      :placeholder="placeholderText"
-    />
-    <button
-      @click="checkForm"
-      class="button"
-    >
-    {{ cta }}
-    </button>
-      <p v-if="result" class="result">
-        {{ result }}
-      </p>
-  </form>
-
-  </div>
-
+      <form class="row-cell input-block">
+      <input
+        :name="inputName"
+        v-model="fieldValue"
+        :type="type"
+        :placeholder="placeholderText"
+      />
+      <button
+        @click="checkForm"
+        class="button"
+      >
+      {{ cta }}
+      </button>
+        <p v-if="result" class="result">
+          {{ result }}
+        </p>
+    </form>
+    </div>
   </div>
 </template>
 
@@ -36,12 +34,14 @@ export default {
     placeholder: String,
     cta: String,
     type: String,
+    icon: String
   },
     data() {
       return {
             result: '',
             fieldValue: '',
             placeholderText: this.placeholder,
+            inputIcon: this.icon,
       };
   },
    methods: {
@@ -67,18 +67,18 @@ export default {
             this.result = '';
           }
         },
-    }
+    },
 }
 </script>
 
 <style>
 .container {
-    width: 100%;
     height: 125px;
     background-color: #223657;
     display: flex;
     align-items: center;
     border-radius: 0px 0px 5px 5px;
+    padding: 0px 30px 0px 30px;
 }
 
 .form-row {
@@ -86,16 +86,14 @@ export default {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    height: 45px;
-    padding: 0px 30px 0px 30px;
 }
 
 .row-cell {
-  position: relative;
+    position: relative;
+    height: 45px;
     display: flex;
     flex-wrap: wrap;
-    color: #FFFFFF;
-    height: 100%;
+    color: #FFF;
 }
 
 .description {
@@ -111,6 +109,7 @@ export default {
 
 input {
   width: 216px;
+  height: 100%;
   display: block;
   box-sizing: border-box;
   border: 1px solid #E4E4E4;
@@ -119,6 +118,7 @@ input {
 
 input::placeholder {
   text-align: left;
+  padding-left: 46px;
   letter-spacing: 0px;
   color: #9E9E9E;
   opacity: 1;
@@ -144,5 +144,38 @@ input::placeholder {
   bottom: -35px;
   font-size: 14px;
   color: white;
+}
+
+@media (max-width: 600px) {
+  .container {
+    justify-content: center;
+    height: 150px;
+  }
+  .form-row {
+      flex-direction: column;
+    }
+  .row-cell {
+      width: 100%;
+
+      flex-wrap: nowrap;
+      text-align: center;
+  }
+  .input-block {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 375px) {
+    .container {
+      padding-bottom: 20px;
+    }
+
+  input {
+    width: 185px;
+  }
+  .result {
+    bottom: -40px;
+  }
+
 }
 </style>

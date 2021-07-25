@@ -32,7 +32,7 @@ export default {
       sliderValue: this.minValue,
       step: 1,
       dotSize: 26,
-      toolTipStyleObject: {
+      toolTipStyle: {
         'background-color': '#01AED8',
         'border-color': '#01AED8',
       },
