@@ -16,7 +16,8 @@
         </template>
       </div>
       <p class="result-title">
-        Μηνιαία Δόση: <span class="result-value">{{ calculateMonthlyValue }}</span>
+        Μηνιαία Δόση: 
+          <span class="result-value">{{ calculateMonthlyValue }}</span>
         <span class="result-symbol">€</span>
       </p>
       <template v-slot:footer>
@@ -39,9 +40,9 @@
 </template>
 
 <script>
-import Modal from './components/Modal.vue';
+import Modal from './components/Modal/Modal.vue';
 import SliderWrapper from './components/SliderWrapper.vue';
-import FormInput from './components/FormInput.vue';
+import FormInput from './components/FormInput/FormInput.vue';
 
 export default {
     name: 'App',
@@ -53,7 +54,8 @@ export default {
     data() {
         return {
             title: 'Υπολογισμός δόσης',
-            subtitle: 'Επίλεξε την προκαταβολή και την διάρκεια που σε συμφέρει',
+            subtitle: 
+              'Επίλεξε την προκαταβολή και την διάρκεια που σε συμφέρει',
             showModal: false,
             modalSliderItems: [
                 { 
@@ -77,7 +79,8 @@ export default {
                 downPayment: 0,
                 duration: 3,
             },
-            formInputDescription: 'Συμπλήρωσε εδώ το τηλέφωνό σου. Θα σε καλέσουμε άμεσα.',
+            formInputDescription: 
+              'Συμπλήρωσε εδώ το τηλέφωνό σου. Θα σε καλέσουμε άμεσα.',
             formInputName: 'telephone',
             formInputPlaceholder: 'Αριθμός τηλεφώνου…',
             formInputCTA: 'Καλεστε',
@@ -94,7 +97,8 @@ export default {
             return this.sliderData;
         },
         formattedValue(value) {
-            const formattedThousands = value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
+            const formattedThousands = 
+            value.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
             return formattedThousands.replace(/.([^.]*)$/, ',$1');
         },
         updateInputValue(value) {
@@ -104,7 +108,8 @@ export default {
     computed: {
         calculateMonthlyValue: function () {
             const finalPrice = 20000;
-            const subtraction = parseInt(finalPrice, 10) - parseInt(this.sliderData.downPayment, 10);
+            const subtraction = 
+              parseInt(finalPrice, 10)-parseInt(this.sliderData.downPayment, 10);
             const result = subtraction / parseInt(this.sliderData.duration, 10);
             return this.formattedValue(result.toFixed(2));
         }

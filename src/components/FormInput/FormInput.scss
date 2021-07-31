@@ -1,0 +1,117 @@
+.form {
+    height: 125px;
+    background-color: #223657;
+    display: flex;
+    align-items: center;
+    border-radius: 0px 0px 5px 5px;
+    padding: 0px 30px 0px 30px;
+    &__row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+    }
+    &__cell {
+      position: relative;
+      height: 45px;
+      display: flex;
+      flex-wrap: wrap;
+      color: #FFF;
+    }
+  }
+
+  .description {
+    width: 40%;
+    text-align: left;
+  }
+
+  .input {
+    &__container {
+        position: relative;
+    }
+    &--block {
+      width: 60%;
+      display: flex;
+      justify-content: flex-end;
+    }
+  }
+
+  input {
+    width: 216px;
+    height: 100%;
+    display: block;
+    box-sizing: border-box;
+    border: 1px solid #E4E4E4;
+    border-radius: 5px 0px 0px 5px;
+    &:placeholder-shown {
+      text-align: left;
+      padding-left: 46px;
+      letter-spacing: 0px;
+      color: #9E9E9E;
+      opacity: 1;
+    }
+  }
+
+  .icon {
+    content: "";
+    position: absolute;
+    left: 20px;
+    top: 12px;
+    bottom: 0;
+    width: 20px;
+  }
+
+  .button {
+    width: 100px;
+    background-color: #55AC36;
+    background: #55AC36 0% 0% no-repeat padding-box;
+    border-radius: 0px 5px 5px 0px;
+    text-align: center;
+    letter-spacing: 0px;
+    color: #FFF;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+  }
+
+  .result {
+    position: absolute;
+    bottom: -35px;
+    font-size: 14px;
+    color: white;
+  }
+
+  @media (max-width: 600px) {
+    .form {
+      justify-content: center;
+      height: 150px;
+      &__row {
+        flex-direction: column;
+      }
+      &__cell {
+        width: 100%;
+        flex-wrap: nowrap;
+        text-align: center;
+      }
+    }
+
+    .input--block {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .form {
+      padding-bottom: 20px;
+    }
+
+    input {
+      width: 185px;
+    }
+
+    .result {
+      bottom: -40px;
+    }
+  }

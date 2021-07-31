@@ -61,11 +61,11 @@ export default {
 </script>
 
 <style>
-.slider {
-  width: 100%;
-}
+  .slider {
+    width: 100%;
+  }
 
-.vue-range-slider.slider-component {
-  padding: 13px 0px 13px 0px !important;
-}
+  .vue-range-slider.slider-component {
+    padding: 13px 0px 13px 0px !important;
+  }
 </style> 
